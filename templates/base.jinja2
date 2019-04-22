@@ -14,7 +14,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="mx-4">
-      <a class="navbar-brand" href="/"><span class="oi oi-chevron-right"></span> Canada Importer Database</a>
+      <a class="navbar-brand" href="{{ url_for("index") }}"><span class="oi oi-chevron-right"></span> Canada Importer Database</a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@
             <!-- left side of menu-->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/random">Random Importer</a>
+                    <a class="nav-link" href="{{ url_for("random") }}">Random Importer</a>
                 <li>
 
                 <li class="ml-5 nav-item">
