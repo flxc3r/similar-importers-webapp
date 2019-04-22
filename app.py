@@ -6,11 +6,7 @@ from random import randint
 
 app = Flask(__name__)
 
-if __name__ == "__main__":
-    from secrets_api import API_ENDPOINT, API_KEY
-else:
-    from .secrets_api import API_ENDPOINT, API_KEY
-
+from secrets_api import API_ENDPOINT, API_KEY
 
 @app.route('/')
 def index():
