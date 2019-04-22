@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CanadaImport | {% block title %}{% endblock %}</title>
+
+    {% include 'html_dependencies.jinja2' %}
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="mx-4">
+      <a class="navbar-brand" href="/"><span class="oi oi-chevron-right"></span> Canada Importer Database</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <!-- left side of menu-->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/random">Random Importer</a>
+                <li>
+
+                <li class="ml-5 nav-item">
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Company Name" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <li>
+
+            </ul>
+
+            <!-- right side of menu-->
+    </div>
+
+</nav>
+
+
+<div class="content container">
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+</body>
+</html>

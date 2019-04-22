@@ -1,0 +1,30 @@
+{% extends "base.jinja2" %}
+
+{% block title %}{{ product['product_name'] }}{% endblock %}
+
+{% block content %}
+
+</br>
+<div class="jumbotron">
+  <h2>{{ product['product_name'] }}</h2>
+</div>
+
+
+<p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#importers" aria-expanded="false" aria-controls="importers">
+    Importers
+  </button>
+</p>
+<div class="collapse" id="importers">
+  <div class="card card-body">
+    {% for importer in product_importers %}
+      <p><a href="{{ url_for("importer", id=importer['importer_id']) }}">{{importer['importer_name']}}</a></p>
+    {% endfor %}
+    
+  </div>
+</div>
+
+
+
+<br>
+{% endblock %}

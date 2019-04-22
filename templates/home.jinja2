@@ -1,0 +1,23 @@
+{% extends "base.jinja2" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+</br>
+<div class="jumbotron">
+    <h2>Welcome{% if g.user %}, {{g.user.profile.firstName}}{% endif %}</h2>
+
+    <p>Hello world</p>
+    <p>Today's date: {{ today }}</p>
+    </br>
+    <p>Some companies to get started:</p>
+    <li><a href="importer/1439" >Air Canada</a></li>
+    <li><a href="importer/1440" >Air Canada Jazz</a></li>
+    <li><a href="importer/3262" >Banque Nationale</a></li>
+    <li><a href="importer/2874" >AURORA TIMBERLAND WHOLESALE HARDWOOD LUMBER</a></li>
+</div>
+
+
+
+{% endblock %}

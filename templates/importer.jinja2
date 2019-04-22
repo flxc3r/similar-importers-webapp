@@ -1,0 +1,121 @@
+{% extends "base.jinja2" %}
+
+{% block title %}{{ importer['importer_name'] }}{% endblock %}
+
+{% block content %}
+
+</br>
+<div class="jumbotron">
+    <h2>{{ importer['importer_name'] }}</h2>
+
+    {% for address in importer['importer_addresses'] %}
+        <p>{{ address['city'] }}, {{ address['province'] }} {% if address['postalcode'] %}{{ address['postalcode'] }}{% endif %}</p>
+    {% endfor %}
+
+</div>
+
+
+<p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#products" aria-expanded="false" aria-controls="products">
+    Imported Products
+  </button>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#similar" aria-expanded="false" aria-controls="similar">
+    Similar Importers
+  </button>
+</p>
+
+<div class="collapse" id="products">
+  <div class="card card-body">
+    {% for product in importer_products %}
+      <p><a href="{{ url_for("product", id=product['product_id']) }}">{{product['product_name']}}</a></p>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="collapse" id="similar">
+  <div class="card card-body">
+    {% for importer in similar_importers %}
+      <p><a href="{{ url_for("importer", id=importer['importer_id']) }}">{{importer['importer_name']}}</a> ({{importer['distance']}})</p>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+<!--
+<p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Imports</a>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Similar companies</button>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button>
+</p>
+<div class="row">
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample1">
+      <div class="card card-body">
+        <h3>Imports</h3>
+        {% for product in importer['products'] %}
+            <p>{{product}}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample2">
+        {% if not g.user %}
+            <div class="card card-body">
+                <h3>Similar companies</h3>
+                <p class="bg-warning">
+                    <span class="ml-5 mr-2 my-3 oi oi-lock-locked"></span>This section is restricted to members only. Please <a style="text-decoration: none; color: #000000; border-bottom: 1px solid black;" href="/login">login or signup</a>.
+                </p>
+            </div>
+
+        {% else %}
+          <div class="card card-body">
+            <h3>Similar companies</h3>
+            <table id="table_id" class="display">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Distance</th>
+                        <th>Products</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for simco in importer['similar'] %}
+
+                        <tr>
+                            <td><a href="{{simco['id']}}" >{{simco['name']}}</a></td>
+                            <td>{{simco['distance']}}</td>
+                            <td>
+                                {% for in_common in simco['in_common'] %}
+                                    <p>{{in_common}}</p>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+
+            <script>
+            $(document).ready( function () {
+                $('#table_id').DataTable(
+                    {
+                    "order": [[ 1, "asc" ]]
+                } );
+            } );
+            </script>
+
+          </div>
+        {% endif %}
+    </div>
+  </div>
+</div>
+-->
+
+<br>
+{% endblock %}
