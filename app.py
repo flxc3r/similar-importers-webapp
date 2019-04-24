@@ -50,8 +50,50 @@ def random():
     return redirect(url_for("importer", id=rdm))
 
 
+### search
+
+import csv
+import re
+
+
+
+def fuzzyfinder(user_input, collection):
+    suggestions = []
+    pattern = '.*?'.join(user_input)  # Converts 'djm' to 'd.*?j.*?m'
+    regex = re.compile(pattern, re.IGNORECASE)  # Compiles a regex.
+    for item in collection:
+        match = regex.search(item)  # Checks if the current item matches the regex.
+        if match:
+            suggestions.append((len(match.group()), match.start(), item))
+    return [x for _, _, x in sorted(suggestions)]
+
+
+@app.route("/search/<q>")
+def search(q):
+
+    with open('static/data/products.csv', 'r') as f:
+        reader = csv.reader(f)
+        output_list = list(reader)
+        name_to_id = dict((v,k) for k,v in dict(output_list).items())
+        collection = [i[1] for i in output_list]
+    
+        ordered_matches = fuzzyfinder(q, collection)
+        hits_products = [{"id": name_to_id[name], "name":name, "class":"product"} for name in ordered_matches]
+
+    with open('static/data/importers.csv', 'r') as f:
+        reader = csv.reader(f)
+        output_list = list(reader)
+        name_to_id = dict((v,k) for k,v in dict(output_list).items())
+        collection = [i[1] for i in output_list]
+    
+        ordered_matches = fuzzyfinder(q, collection)
+        hits_importers = [{"id": name_to_id[name], "name":name, "class":"importer"} for name in ordered_matches]
+    
+    return render_template('search.jinja2', hits_products=hits_products, hits_importers=hits_importers, q=q)
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
 
 
 
