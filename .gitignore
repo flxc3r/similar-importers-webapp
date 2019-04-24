@@ -1,2 +1,4 @@
 venv/
 zappa_settings.json
+ignore_me/
+.ipynb_checkpoints/
