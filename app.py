@@ -55,8 +55,6 @@ def random():
 import csv
 import re
 
-
-
 def fuzzyfinder(user_input, collection):
     suggestions = []
     pattern = '.*?'.join(user_input)  # Converts 'djm' to 'd.*?j.*?m'
@@ -92,8 +90,35 @@ def search(q):
     return render_template('search.jinja2', hits_products=hits_products, hits_importers=hits_importers, q=q)
 
 
+
+
+
+### dev graph
+
+@app.route('/importer_graph/<id>')
+def importer_graph(id):
+    URL = API_ENDPOINT + "importer/" + id
+    r = requests.get(URL, headers={"x-api-key": API_KEY})
+    importer = json.loads(r.content)
+
+    URL = API_ENDPOINT + "importer/" + id + "/products"
+    r = requests.get(URL, headers={"x-api-key": API_KEY})
+    importer_products = json.loads(r.content)
+
+    URL = API_ENDPOINT + "importer/" + id + "/similar"
+    r = requests.get(URL, headers={"x-api-key": API_KEY})
+    similar_importers = json.loads(r.content)
+
+    URL = API_ENDPOINT + "importer/" + id + "/similar/products"
+    r = requests.get(URL, headers={"x-api-key": API_KEY})
+    similar_importer_products = json.loads(r.content)
+
+    return render_template('importer_graph.jinja2', importer=importer, importer_products=importer_products, similar_importers=similar_importers, similar_importer_products=similar_importer_products)
+
+
+
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
 
 
 
